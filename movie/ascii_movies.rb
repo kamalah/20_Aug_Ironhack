@@ -5,15 +5,14 @@ require 'matrix'
 class Movies
 	def initialize
 		@movie_titles= []
-		@movies_result =[]
-		
+		@movies_result = []
+		@movie_ratings = []
 	end
 
 	def get_movies(file_name)
 		IO.foreach(file_name) do |line|
 			@movie_titles<<line
 		end
-		@rating_matrix =Matrix.build(10,@movie_titles.length) {" "}
 	end
 
 	def create_movie_results
@@ -28,12 +27,17 @@ class Movies
 	end
 
 	def print_ratings
-		i = 0
-		while (i < (@rating_matrix.row_count-1))
-			matrix_row = @rating_matrix.row(i)
-			matrix_row.each {|variable| print "|#{variable}"}
-			puts "|"
-			i +=1	
+		
+		10.times do |i|
+		print "|"	
+		@movie_ratings.each do |rating|
+			if rating >= (10-i)
+				print "#|"
+			else
+				print " |"
+			end
+		end
+		puts ""
 		end
 		print "|"
 		print (1..@movie_titles.length).to_a.join("|")
@@ -45,16 +49,8 @@ class Movies
 	end
 	
 	def get_rating
-		ind = 0
 		@movies_result.each do |movie|
-			rating = movie.rating.round
-			
-			row = 9
-			rating.times do 
-				@rating_matrix[row,ind] = "#"
-				row -=1
-			end
-			ind+=1
+			@movie_ratings<<movie.rating.round
 		end
 	end
 end
