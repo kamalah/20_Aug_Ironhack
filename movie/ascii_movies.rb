@@ -1,6 +1,4 @@
 require 'imdb'
-require 'pry'
-require 'matrix'
 
 class Movies
 	def initialize
@@ -28,17 +26,18 @@ class Movies
 
 	def print_ratings
 		
-		10.times do |i|
+		10.downto(1) do |i|
 		print "|"	
 		@movie_ratings.each do |rating|
-			if rating >= (10-i)
+			if rating >= i
 				print "#|"
 			else
 				print " |"
 			end
+			end
+			puts ""
 		end
-		puts ""
-		end
+		
 		print "|"
 		print (1..@movie_titles.length).to_a.join("|")
 		puts "|"
@@ -55,27 +54,6 @@ class Movies
 	end
 end
 
-class RatingsDisplay
-	def initialize(movies)
-		@movies =movies
-	end
-
-	def show_ratings
-
-	end
-
-	def show_titles
-
-	end
-
-end
-
-class Matrix
-  def []=(i, j, x)
-    @rows[i][j] = x
-  end
-end
- 
 my_movies = Movies.new
 my_movies.get_movies("movies.txt")
 my_movies.create_movie_results
