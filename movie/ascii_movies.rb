@@ -1,12 +1,10 @@
 require 'imdb'
-require 'pry'
 require 'matrix'
 
 class Movies
 	def initialize
 		@movie_titles= []
 		@movies_result =[]
-		
 	end
 
 	def get_movies(file_name)
@@ -48,7 +46,6 @@ class Movies
 		ind = 0
 		@movies_result.each do |movie|
 			rating = movie.rating.round
-			
 			row = 9
 			rating.times do 
 				@rating_matrix[row,ind] = "#"
@@ -57,21 +54,6 @@ class Movies
 			ind+=1
 		end
 	end
-end
-
-class RatingsDisplay
-	def initialize(movies)
-		@movies =movies
-	end
-
-	def show_ratings
-
-	end
-
-	def show_titles
-
-	end
-
 end
 
 class Matrix
